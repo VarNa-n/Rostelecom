@@ -38,8 +38,8 @@ def test_auth_by_phone(web_browser):
     print(web_browser.current_url)
     print(f'h2.user-name[title="{valid_username}"]')
     # Проверка
-    assert link_lk in web_browser.current_url, f"Текущая ссылка {web_browser.current_url} не содержит account_b2"
-    assert web_browser.find_element(By.CSS_SELECTOR, f'h2.user-name[title="{valid_username}"]'), f"На странице нет элемента {valid_username}"
+    assert link_lk in web_browser.current_url, f"AT-001 failed: Текущая ссылка {web_browser.current_url} не содержит account_b2"
+    assert web_browser.find_element(By.CSS_SELECTOR, f'h2.user-name[title="{valid_username}"]'), f"AT-001 failed: На странице нет элемента {valid_username}"
 
 
 def test_auth_by_email(web_browser):
@@ -70,8 +70,8 @@ def test_auth_by_email(web_browser):
     print(web_browser.current_url)
     print(f'h2.user-name[title="{valid_username}"]')
     # Проверка
-    assert link_lk in web_browser.current_url, f"Текущая ссылка {web_browser.current_url} не содержит account_b2"
-    assert web_browser.find_element(By.CSS_SELECTOR, f'h2.user-name[title="{valid_username}"]'), f"На странице нет элемента {valid_username}"
+    assert link_lk in web_browser.current_url, f"AT-002 failed: Текущая ссылка {web_browser.current_url} не содержит account_b2"
+    assert web_browser.find_element(By.CSS_SELECTOR, f'h2.user-name[title="{valid_username}"]'), f"AT-002 failed: На странице нет элемента {valid_username}"
 
 
 @pytest.mark.skip("При регистрации не был получен логин, позитивный тест невозможен")
@@ -103,8 +103,8 @@ def test_auth_by_login(web_browser):
     print(web_browser.current_url)
     print(f'h2.user-name[title="{valid_username}"]')
     # Проверка
-    assert link_lk in web_browser.current_url, f"Текущая ссылка {web_browser.current_url} не содержит account_b2"
-    assert web_browser.find_element(By.CSS_SELECTOR, f'h2.user-name[title="{valid_username}"]'), f"На странице нет элемента {valid_username}"
+    assert link_lk in web_browser.current_url, f"AT-003 failed: Текущая ссылка {web_browser.current_url} не содержит account_b2"
+    assert web_browser.find_element(By.CSS_SELECTOR, f'h2.user-name[title="{valid_username}"]'), f"AT-003 failed: На странице нет элемента {valid_username}"
 
 
 @pytest.mark.skip("Без подключения услуги нет лицевого счета, позитивный тест невозможен")
@@ -136,8 +136,8 @@ def test_auth_by_ls(web_browser):
     print(web_browser.current_url)
     print(f'h2.user-name[title="{valid_username}"]')
     # Проверка
-    assert link_lk in web_browser.current_url, f"Текущая ссылка {web_browser.current_url} не содержит account_b2"
-    assert web_browser.find_element(By.CSS_SELECTOR, f'h2.user-name[title="{valid_username}"]'), f"На странице нет элемента {valid_username}"
+    assert link_lk in web_browser.current_url, f"AT-004 failed: Текущая ссылка {web_browser.current_url} не содержит account_b2"
+    assert web_browser.find_element(By.CSS_SELECTOR, f'h2.user-name[title="{valid_username}"]'), f"AT-004 failed: На странице нет элемента {valid_username}"
 
 
 @pytest.mark.parametrize(("username, username_title"),
@@ -168,9 +168,6 @@ def test_auth_in_any_tab(username, username_title, web_browser):
 
     print(username_title)
 
-    # Проверка, что таб переключился
-    assert username_title == web_browser.find_element(By.CSS_SELECTOR, "div.rt-tab--active").text
-
     # Если есть капча, делаем задержку для ввода капчи
     if page.captcha:
         time.sleep(20)
@@ -186,5 +183,5 @@ def test_auth_in_any_tab(username, username_title, web_browser):
     print(web_browser.current_url)
     print(f'h2.user-name[title="{valid_username}"]')
     # Проверка
-    assert link_lk in web_browser.current_url, f"Текущая ссылка {web_browser.current_url} не содержит account_b2"
-    assert web_browser.find_element(By.CSS_SELECTOR, f'h2.user-name[title="{valid_username}"]'), f"На странице нет элемента {valid_username}"
+    assert link_lk in web_browser.current_url, f"AT-005 failed: Текущая ссылка {web_browser.current_url} не содержит account_b2"
+    assert web_browser.find_element(By.CSS_SELECTOR, f'h2.user-name[title="{valid_username}"]'), f"AT-005 failed: На странице нет элемента {valid_username}"

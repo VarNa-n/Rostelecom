@@ -26,6 +26,15 @@ class AuthPage(BasePage):
         # Слоган
         self.ad_slogan = driver.find_element(*AuthLocators.AD_RT)
 
+        # Ссылка "Забыл пароль"
+        self.forgot_pass = driver.find_element(*AuthLocators.FORGOT_PASS)
+
+        # Ссылка "Зарегистрироваться"
+        self.new_reg = driver.find_element(*AuthLocators.NEW_REG)
+
+        # Ссылка "Пользовательское соглашение"
+        self.user_agree = driver.find_element(*AuthLocators.USER_AGREE)
+
         # Вывод ошибок
         try:
             self.err_msg = driver.find_element(*AuthLocators.ERR_MSG)

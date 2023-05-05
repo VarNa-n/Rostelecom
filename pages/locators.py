@@ -20,6 +20,15 @@ class AuthLocators:
     # Слоган
     AD_RT = (By.CSS_SELECTOR, "p.what-is__desc")
 
+    # Ссылка "Забыл пароль"
+    FORGOT_PASS = (By.ID, "forgot_password")
+
+    # Ссылка "Зарегистрироваться"
+    NEW_REG = (By.ID, "kc-register")
+
+    # Ссылка "Пользовательское соглашение"
+    USER_AGREE = (By.CSS_SELECTOR, "div.auth-policy a")
+
     # Ошибки
     ERR_MSG = (By.ID, "form-error-message")
 
