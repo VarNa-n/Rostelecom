@@ -1,0 +1,349 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- C:\Users\Varshavskaya\PycharmProjects\Rostelecom\venv\Scripts\python.exe
+cachedir: .pytest_cache
+metadata: {'Python': '3.11.0', 'Platform': 'Windows-10-10.0.19045-SP0', 'Packages': {'pytest': '6.2.5', 'pluggy': '1.0.0'}, 'Plugins': {'base-url': '2.0.0', 'html': '3.2.0', 'metadata': '2.0.4', 'selenium': '4.0.0', 'variables': '2.0.0'}, 'Base URL': '', 'Driver': 'Chrome', 'Capabilities': {}}
+driver: Chrome
+sensitiveurl: .*
+rootdir: C:\Users\Varshavskaya\PycharmProjects\Rostelecom
+plugins: base-url-2.0.0, html-3.2.0, metadata-2.0.4, selenium-4.0.0, variables-2.0.0
+collecting ... collected 41 items
+
+tests/test_auth_page_elements.py::test_tab_phone PASSED                  [  2%]
+tests/test_auth_page_elements.py::test_tab_email PASSED                  [  4%]
+tests/test_auth_page_elements.py::test_tab_login PASSED                  [  7%]
+tests/test_auth_page_elements.py::test_tab_ls PASSED                     [  9%]
+tests/test_auth_page_elements.py::test_input_field PASSED                [ 12%]
+tests/test_auth_page_elements.py::test_ad_slogan PASSED                  [ 14%]
+tests/test_auth_page_elements.py::test_auto_switch_tab[By email] PASSED  [ 17%]
+tests/test_auth_page_elements.py::test_auto_switch_tab[By login] PASSED  [ 19%]
+tests/test_auth_page_elements.py::test_auto_switch_tab[By LS] FAILED     [ 21%]
+tests/test_auth_page_elements.py::test_auto_switch_tab[By phone] PASSED  [ 24%]
+tests/test_auth_page_elements.py::test_forgot_password PASSED            [ 26%]
+tests/test_auth_page_elements.py::test_new_reg PASSED                    [ 29%]
+tests/test_auth_page_elements.py::test_user_agree PASSED                 [ 31%]
+tests/test_negative_auth.py::test_auth_by_empty_phone[Empty phone] PASSED [ 34%]
+tests/test_negative_auth.py::test_auth_by_empty_phone[Space phone] PASSED [ 36%]
+tests/test_negative_auth.py::test_auth_by_empty_email[Empty email] FAILED [ 39%]
+tests/test_negative_auth.py::test_auth_by_empty_email[Space email] PASSED [ 41%]
+tests/test_negative_auth.py::test_auth_by_empty_login[Empty login] PASSED [ 43%]
+tests/test_negative_auth.py::test_auth_by_empty_login[Space login] PASSED [ 46%]
+tests/test_negative_auth.py::test_auth_by_empty_ls[Empty ls] PASSED      [ 48%]
+tests/test_negative_auth.py::test_auth_by_empty_ls[Space ls] PASSED      [ 51%]
+tests/test_negative_auth.py::test_auth_by_username_and_empty_password[Phone: Empty password] XFAIL [ 53%]
+tests/test_negative_auth.py::test_auth_by_username_and_empty_password[Phone: Space password] XFAIL [ 56%]
+tests/test_negative_auth.py::test_auth_by_username_and_empty_password[Email: Empty password] XFAIL [ 58%]
+tests/test_negative_auth.py::test_auth_by_username_and_empty_password[Email: Space password] XFAIL [ 60%]
+tests/test_negative_auth.py::test_auth_by_username_and_empty_password[Login: Empty password] XFAIL [ 63%]
+tests/test_negative_auth.py::test_auth_by_username_and_empty_password[Login: Space password] XFAIL [ 65%]
+tests/test_negative_auth.py::test_auth_by_username_and_empty_password[LS: Empty password] XFAIL [ 68%]
+tests/test_negative_auth.py::test_auth_by_username_and_empty_password[LS: Space password] XFAIL [ 70%]
+tests/test_negative_auth.py::test_auth_by_wrong_phone[Wrong phone number] PASSED [ 73%]
+tests/test_negative_auth.py::test_auth_by_wrong_phone[Wrong email] PASSED [ 75%]
+tests/test_negative_auth.py::test_auth_by_wrong_password[Phone: Wrong password] PASSED [ 78%]
+tests/test_negative_auth.py::test_auth_by_wrong_password[Email: Wrong password] PASSED [ 80%]
+tests/test_negative_auth.py::test_auth_by_bad_format_phone[Not correct numb] PASSED [ 82%]
+tests/test_negative_auth.py::test_auth_by_bad_format_email[Not correct email] PASSED [ 85%]
+tests/test_positive_auth.py::test_auth_by_phone PASSED                   [ 87%]
+tests/test_positive_auth.py::test_auth_by_email PASSED                   [ 90%]
+tests/test_positive_auth.py::test_auth_by_login SKIPPED (При регистр...) [ 92%]
+tests/test_positive_auth.py::test_auth_by_ls SKIPPED (Без подключени...) [ 95%]
+tests/test_positive_auth.py::test_auth_in_any_tab[By email] PASSED       [ 97%]
+tests/test_positive_auth.py::test_auth_in_any_tab[By phone] PASSED       [100%]
+
+================================== FAILURES ===================================
+_________________________ test_auto_switch_tab[By LS] _________________________
+
+username = '123456789098', tab_title = 'Лицевой счёт'
+web_browser = <selenium.webdriver.chrome.webdriver.WebDriver (session="5820036c6d4ae830b69e0bfc66f1c303")>
+
+    @pytest.mark.parametrize(("username, tab_title"),
+                                [
+                                    (valid_email, u"Почта"),
+                                    (valid_login, u"Логин"),
+                                    (valid_ls, u"Лицевой счёт"),
+                                    (valid_phone, u"Телефон")
+                                ],
+                                ids= [
+                                    'By email',
+                                    'By login',
+                                    "By LS",
+                                    "By phone"]
+                             )
+    def test_auto_switch_tab(username, tab_title, web_browser):
+        """ Тест-кейс FT-007: автоматическая смена таба при вводе соотвествующего способа авторизации """
+    
+        page = AuthPage(web_browser)
+    
+        # Если проверяем ввод телефона, переходим предварительно на таб Почта, т.к. таб Телефон открыт по умолчанию
+        if tab_title == "Телефон":
+            page.swich_tab(page.tab_email)
+    
+        # Вводим логин
+        page.enter_username(username)
+        # Кликаем на пароль
+        page.password.click()
+    
+        time.sleep(3)
+    
+        # Смотрим активный таб
+        active_tab = web_browser.find_element(By.CSS_SELECTOR, "div.rt-tab--active").text
+        # print(f"\n{active_tab} == {tab_title}")
+    
+>       assert active_tab == tab_title, "FT-007 failed: Таб автоматически не изменился"
+E       AssertionError: FT-007 failed: Таб автоматически не изменился
+E       assert 'Телефон' == 'Лицевой счёт'
+E         - Лицевой счёт
+E         + Телефон
+
+tests\test_auth_page_elements.py:110: AssertionError
+---------------------------- Captured stdout setup ----------------------------
+
+Test number: fca9818f-f129-49d7-b7b4-100b5bbeb9ab
+
+------------------------------- pytest-selenium -------------------------------
+Driver log: C:\Users\Varshavskaya\AppData\Local\Temp\pytest-of-Varshavskaya\pytest-38\test_auto_switch_tab_By_LS_0\driver.log
+URL: https://b2c.passport.rt.ru/auth/realms/b2c/protocol/openid-connect/auth?client_id=account_b2c&redirect_uri=https://b2c.passport.rt.ru/account_b2c/login&response_type=code&scope=openid&state=e4a512b2-d832-4889-924a-e92df3f39aa2&theme&auth_type
+-------------------------- Captured stdout teardown ---------------------------
+
+Screenshot with error: fca9818f-f129-49d7-b7b4-100b5bbeb9ab.png
+
+---------------------------- Captured log teardown ----------------------------
+WARNING  urllib3.connectionpool:connectionpool.py:871 Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000022F08757B50>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/5820036c6d4ae830b69e0bfc66f1c303
+WARNING  urllib3.connectionpool:connectionpool.py:871 Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000022F086DCCD0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/5820036c6d4ae830b69e0bfc66f1c303
+WARNING  urllib3.connectionpool:connectionpool.py:871 Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000022F0874C290>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/5820036c6d4ae830b69e0bfc66f1c303
+____________________ test_auth_by_empty_email[Empty email] ____________________
+
+email = ''
+web_browser = <selenium.webdriver.chrome.webdriver.WebDriver (session="74b6667b79a062ea0a0e2cf6dca7c669")>
+
+    @pytest.mark.parametrize("email", ['', ' '], ids=["Empty email", "Space email"])
+    def test_auth_by_empty_email(email, web_browser):
+        """ Тест-кейс AT-011: попытка авторизации с пустым адресом электронной почты """
+    
+>       page = AuthPage(web_browser)
+
+tests\test_negative_auth.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pages\auth_page.py:18: in __init__
+    self.tab_phone = driver.find_element(*AuthLocators.TAB_PHONE)
+venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py:831: in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py:440: in execute
+    self.error_handler.check_response(response)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x0000022F08B0EFD0>
+response = {'status': 404, 'value': '{"value":{"error":"no such element","message":"no such element: Unable to locate element: {\...\n\\tRtlGetAppContainerNamedObjectPath [0x77977B4E+286]\\n\\tRtlGetAppContainerNamedObjectPath [0x77977B1E+238]\\n"}}'}
+
+    def check_response(self, response: Dict[str, Any]) -> None:
+        """Checks that a JSON response from the WebDriver does not have an
+        error.
+    
+        :Args:
+         - response - The JSON response from the WebDriver server as a dictionary
+           object.
+    
+        :Raises: If the response contains an error message.
+        """
+        status = response.get("status", None)
+        if not status or status == ErrorCode.SUCCESS:
+            return
+        value = None
+        message = response.get("message", "")
+        screen: str = response.get("screen", "")
+        stacktrace = None
+        if isinstance(status, int):
+            value_json = response.get("value", None)
+            if value_json and isinstance(value_json, str):
+                import json
+    
+                try:
+                    value = json.loads(value_json)
+                    if len(value) == 1:
+                        value = value["value"]
+                    status = value.get("error", None)
+                    if not status:
+                        status = value.get("status", ErrorCode.UNKNOWN_ERROR)
+                        message = value.get("value") or value.get("message")
+                        if not isinstance(message, str):
+                            value = message
+                            message = message.get("message")
+                    else:
+                        message = value.get("message", None)
+                except ValueError:
+                    pass
+    
+        exception_class: Type[WebDriverException]
+        if status in ErrorCode.NO_SUCH_ELEMENT:
+            exception_class = NoSuchElementException
+        elif status in ErrorCode.NO_SUCH_FRAME:
+            exception_class = NoSuchFrameException
+        elif status in ErrorCode.NO_SUCH_SHADOW_ROOT:
+            exception_class = NoSuchShadowRootException
+        elif status in ErrorCode.NO_SUCH_WINDOW:
+            exception_class = NoSuchWindowException
+        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:
+            exception_class = StaleElementReferenceException
+        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:
+            exception_class = ElementNotVisibleException
+        elif status in ErrorCode.INVALID_ELEMENT_STATE:
+            exception_class = InvalidElementStateException
+        elif (
+            status in ErrorCode.INVALID_SELECTOR
+            or status in ErrorCode.INVALID_XPATH_SELECTOR
+            or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER
+        ):
+            exception_class = InvalidSelectorException
+        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:
+            exception_class = ElementNotSelectableException
+        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:
+            exception_class = ElementNotInteractableException
+        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:
+            exception_class = InvalidCookieDomainException
+        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:
+            exception_class = UnableToSetCookieException
+        elif status in ErrorCode.TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.SCRIPT_TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.UNKNOWN_ERROR:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:
+            exception_class = UnexpectedAlertPresentException
+        elif status in ErrorCode.NO_ALERT_OPEN:
+            exception_class = NoAlertPresentException
+        elif status in ErrorCode.IME_NOT_AVAILABLE:
+            exception_class = ImeNotAvailableException
+        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:
+            exception_class = ImeActivationFailedException
+        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:
+            exception_class = MoveTargetOutOfBoundsException
+        elif status in ErrorCode.JAVASCRIPT_ERROR:
+            exception_class = JavascriptException
+        elif status in ErrorCode.SESSION_NOT_CREATED:
+            exception_class = SessionNotCreatedException
+        elif status in ErrorCode.INVALID_ARGUMENT:
+            exception_class = InvalidArgumentException
+        elif status in ErrorCode.NO_SUCH_COOKIE:
+            exception_class = NoSuchCookieException
+        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:
+            exception_class = ScreenshotException
+        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:
+            exception_class = ElementClickInterceptedException
+        elif status in ErrorCode.INSECURE_CERTIFICATE:
+            exception_class = InsecureCertificateException
+        elif status in ErrorCode.INVALID_COORDINATES:
+            exception_class = InvalidCoordinatesException
+        elif status in ErrorCode.INVALID_SESSION_ID:
+            exception_class = InvalidSessionIdException
+        elif status in ErrorCode.UNKNOWN_METHOD:
+            exception_class = UnknownMethodException
+        else:
+            exception_class = WebDriverException
+        if not value:
+            value = response["value"]
+        if isinstance(value, str):
+            raise exception_class(value)
+        if message == "" and "message" in value:
+            message = value["message"]
+    
+        screen = None  # type: ignore[assignment]
+        if "screen" in value:
+            screen = value["screen"]
+    
+        stacktrace = None
+        st_value = value.get("stackTrace") or value.get("stacktrace")
+        if st_value:
+            if isinstance(st_value, str):
+                stacktrace = st_value.split("\n")
+            else:
+                stacktrace = []
+                try:
+                    for frame in st_value:
+                        line = frame.get("lineNumber", "")
+                        file = frame.get("fileName", "<anonymous>")
+                        if line:
+                            file = f"{file}:{line}"
+                        meth = frame.get("methodName", "<anonymous>")
+                        if "className" in frame:
+                            meth = f"{frame['className']}.{meth}"
+                        msg = "    at %s (%s)"
+                        msg = msg % (meth, file)
+                        stacktrace.append(msg)
+                except TypeError:
+                    pass
+        if exception_class == UnexpectedAlertPresentException:
+            alert_text = None
+            if "data" in value:
+                alert_text = value["data"].get("text")
+            elif "alert" in value:
+                alert_text = value["alert"].get("text")
+            raise exception_class(message, screen, stacktrace, alert_text)  # type: ignore[call-arg]  # mypy is not smart enough here
+>       raise exception_class(message, screen, stacktrace)
+E       selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="t-btn-tab-phone"]"}
+E         (Session info: chrome=113.0.5672.92)
+E       Stacktrace:
+E       Backtrace:
+E       	GetHandleVerifier [0x011B8893+48451]
+E       	(No symbol) [0x0114B8A1]
+E       	(No symbol) [0x01055058]
+E       	(No symbol) [0x01080467]
+E       	(No symbol) [0x0108069B]
+E       	(No symbol) [0x010ADD92]
+E       	(No symbol) [0x0109A304]
+E       	(No symbol) [0x010AC482]
+E       	(No symbol) [0x0109A0B6]
+E       	(No symbol) [0x01077E08]
+E       	(No symbol) [0x01078F2D]
+E       	GetHandleVerifier [0x01418E3A+2540266]
+E       	GetHandleVerifier [0x01458959+2801161]
+E       	GetHandleVerifier [0x0145295C+2776588]
+E       	GetHandleVerifier [0x01242280+612144]
+E       	(No symbol) [0x01154F6C]
+E       	(No symbol) [0x011511D8]
+E       	(No symbol) [0x011512BB]
+E       	(No symbol) [0x01144857]
+E       	BaseThreadInitThunk [0x76C200C9+25]
+E       	RtlGetAppContainerNamedObjectPath [0x77977B4E+286]
+E       	RtlGetAppContainerNamedObjectPath [0x77977B1E+238]
+
+venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py:245: NoSuchElementException
+---------------------------- Captured stdout setup ----------------------------
+
+Test number: d05237ef-ae01-4f3b-b77d-4e6d2666dec1
+
+------------------------------- pytest-selenium -------------------------------
+Driver log: C:\Users\Varshavskaya\AppData\Local\Temp\pytest-of-Varshavskaya\pytest-38\test_auth_by_empty_email_Empty0\driver.log
+URL: https://b2c.passport.rt.ru/auth/realms/b2c/protocol/openid-connect/auth?client_id=account_b2c&redirect_uri=https://b2c.passport.rt.ru/account_b2c/login&response_type=code&scope=openid&state=7bc9bff1-0862-4738-8155-1b645ba34054&theme&auth_type
+-------------------------- Captured stdout teardown ---------------------------
+
+Screenshot with error: d05237ef-ae01-4f3b-b77d-4e6d2666dec1.png
+
+---------------------------- Captured log teardown ----------------------------
+WARNING  urllib3.connectionpool:connectionpool.py:871 Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000022F08B50D90>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/74b6667b79a062ea0a0e2cf6dca7c669
+WARNING  urllib3.connectionpool:connectionpool.py:871 Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000022F08B51450>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/74b6667b79a062ea0a0e2cf6dca7c669
+WARNING  urllib3.connectionpool:connectionpool.py:871 Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000022F08B51B90>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение')': /session/74b6667b79a062ea0a0e2cf6dca7c669
+============================== warnings summary ===============================
+tests/test_auth_page_elements.py: 13 warnings
+tests/test_negative_auth.py: 22 warnings
+tests/test_positive_auth.py: 4 warnings
+  C:\Users\Varshavskaya\PycharmProjects\Rostelecom\venv\Lib\site-packages\pytest_selenium\pytest_selenium.py:208: DeprecationWarning: executable_path has been deprecated, please pass in a Service object
+    driver = driver_class(**driver_kwargs)
+
+tests/test_auth_page_elements.py: 13 warnings
+tests/test_negative_auth.py: 22 warnings
+tests/test_positive_auth.py: 4 warnings
+  C:\Users\Varshavskaya\PycharmProjects\Rostelecom\venv\Lib\site-packages\selenium\webdriver\chrome\webdriver.py:84: DeprecationWarning: desired_capabilities has been deprecated, please pass in a Service object
+    super().__init__(
+
+tests/test_auth_page_elements.py: 13 warnings
+tests/test_negative_auth.py: 22 warnings
+tests/test_positive_auth.py: 4 warnings
+  C:\Users\Varshavskaya\PycharmProjects\Rostelecom\venv\Lib\site-packages\selenium\webdriver\chrome\webdriver.py:84: DeprecationWarning: service_log_path has been deprecated, please pass in a Service object
+    super().__init__(
+
+-- Docs: https://docs.pytest.org/en/stable/warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_auth_page_elements.py::test_auto_switch_tab[By LS] - Assert...
+FAILED tests/test_negative_auth.py::test_auth_by_empty_email[Empty email] - s...
+= 2 failed, 29 passed, 2 skipped, 8 xfailed, 117 warnings in 1528.91s (0:25:28) =

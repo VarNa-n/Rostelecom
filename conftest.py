@@ -24,6 +24,9 @@ def web_browser(request, selenium):
     browser = selenium
     browser.set_window_size(1400, 1000)
 
+    test_num = str(uuid.uuid4())
+    print(f"\nTest number: {test_num}\n")
+
     # Return browser instance to test case:
     yield browser
 
@@ -33,7 +36,8 @@ def web_browser(request, selenium):
             browser.execute_script("document.body.bgColor = 'yellow';")
 
             # Make screen-shot for local debug:
-            browser.save_screenshot('screenshots/' + str(uuid.uuid4()) + '.png')
+            browser.save_screenshot(f'screenshots/{test_num}.png')
+            print(f"\nScreenshot with error: {test_num}.png\n")
 
         except:
             pass # just ignore any errors here
